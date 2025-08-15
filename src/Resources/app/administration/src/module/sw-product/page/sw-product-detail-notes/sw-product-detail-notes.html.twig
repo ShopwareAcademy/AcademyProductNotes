@@ -1,0 +1,90 @@
+<sw-card :title="$tc('academy-product-notes.detail.cardTitle')" :isLoading="isLoading">
+    <template #toolbar>
+        <sw-button 
+            variant="primary" 
+            size="small"
+            @click="onAddNote">
+            {{ $tc('academy-product-notes.detail.buttonAddNote') }}
+        </sw-button>
+    </template>
+
+    <template #grid>
+        <sw-data-grid
+            v-if="notes.length > 0"
+            :dataSource="notes"
+            :columns="noteColumns"
+            :showSelection="false"
+            :isLoading="isLoading">
+
+            <template #column-note="{ item }">
+                <div class="academy-note-preview">
+                    {{ item.note.length > 100 ? item.note.substring(0, 100) + '...' : item.note }}
+                </div>
+            </template>
+
+            <template #column-solved="{ item }">
+                <sw-icon 
+                    v-if="item.solved" 
+                    name="small-default-checkmark-line-medium" 
+                    color="#37d046">
+                </sw-icon>
+                <sw-icon 
+                    v-else 
+                    name="small-default-x-line-medium" 
+                    color="#de294c">
+                </sw-icon>
+            </template>
+
+            <template #column-createdAt="{ item }">
+                {{ item.createdAt | date }}
+            </template>
+
+            <template #actions="{ item }">
+                <sw-context-menu-item @click="onEditNote(item)">
+                    {{ $tc('academy-product-notes.detail.buttonEdit') }}
+                </sw-context-menu-item>
+                <sw-context-menu-item 
+                    variant="danger"
+                    @click="onDeleteNote(item)">
+                    {{ $tc('academy-product-notes.detail.buttonDelete') }}
+                </sw-context-menu-item>
+            </template>
+        </sw-data-grid>
+
+        <sw-empty-state
+            v-else
+            :title="$tc('academy-product-notes.detail.messageNoNotes')">
+        </sw-empty-state>
+    </template>
+
+    <!-- Note Modal -->
+    <academy-product-note-modal
+        v-if="showModal"
+        :note="currentNote"
+        @save="onSaveNote"
+        @close="onCloseModal">
+    </academy-product-note-modal>
+
+    <!-- Delete Modal -->
+    <sw-modal
+        v-if="showDeleteModal"
+        :title="$tc('academy-product-notes.detail.buttonDelete')"
+        variant="small"
+        @modal-close="onCancelDelete">
+        <p>{{ $tc('academy-product-notes.detail.messageDeleteConfirm') }}</p>
+        
+        <template #modal-footer>
+            <sw-button 
+                size="small"
+                @click="onCancelDelete">
+                {{ $tc('academy-product-notes.detail.buttonCancel') }}
+            </sw-button>
+            <sw-button 
+                variant="danger" 
+                size="small"
+                @click="onConfirmDelete">
+                {{ $tc('academy-product-notes.detail.buttonDelete') }}
+            </sw-button>
+        </template>
+    </sw-modal>
+</sw-card> 

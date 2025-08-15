@@ -1,0 +1,21 @@
+{
+  "name": "academy/product-notes",
+  "description": "Plugin to add notes to products for internal use in the admin panel.",
+  "type": "shopware-platform-plugin",
+  "license": "MIT",
+  "require": {
+    "shopware/core": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "AcademyProductNotes\\": "src/"
+    }
+  },
+  "extra": {
+    "shopware-plugin-class": "AcademyProductNotes\\AcademyProductNotes",
+    "label": {
+      "en-GB": "Academy Product Notes",
+      "de-DE": "Academy Produkt Notizen"
+    }
+  }
+} 

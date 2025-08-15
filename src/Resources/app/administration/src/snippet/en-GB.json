@@ -1,0 +1,32 @@
+{
+  "academy-product-notes": {
+    "general": {
+      "mainMenuItemGeneral": "Product Notes",
+      "descriptionTextModule": "Manage product notes"
+    },
+    "detail": {
+      "tabNotes": "Notes",
+      "cardTitle": "Product Notes",
+      "columnUserName": "User",
+      "columnNote": "Note",
+      "columnSolved": "Solved",
+      "columnCreatedAt": "Created",
+      "columnUpdatedAt": "Updated",
+      "buttonAddNote": "Add Note",
+      "buttonEdit": "Edit",
+      "buttonDelete": "Delete",
+      "buttonSave": "Save",
+      "buttonCancel": "Cancel",
+      "labelUserName": "User Name",
+      "labelNote": "Note",
+      "labelSolved": "Solved",
+      "placeholderUserName": "Enter user name...",
+      "placeholderNote": "Enter note...",
+      "messageDeleteConfirm": "Are you sure you want to delete this note?",
+      "messageNoNotes": "No notes available",
+      "messageSaveSuccess": "Note saved successfully",
+      "messageDeleteSuccess": "Note deleted successfully",
+      "messageError": "An error occurred"
+    }
+  }
+} 

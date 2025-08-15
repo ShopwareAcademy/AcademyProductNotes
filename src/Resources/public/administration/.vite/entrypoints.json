@@ -1,0 +1,23 @@
+{
+  "base": "/bundles/academyproductnotes/administration/",
+  "entryPoints": {
+    "academy-product-notes": {
+      "css": [],
+      "dynamic": [],
+      "js": [
+        "/bundles/academyproductnotes/administration/assets/academy-product-notes-CJJrTNav.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}
