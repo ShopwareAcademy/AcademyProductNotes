@@ -6,7 +6,7 @@
     <services>
         <!-- Entity Definition -->
         <service id="AcademyProductNotes\Core\Content\ProductNote\ProductNoteDefinition">
-            <tag name="shopware.entity.definition" entity="academy_product_note" />
+            <tag name="shopware.entity.definition" />
         </service>
 
         <!-- Product Extension -->
