@@ -3,6 +3,7 @@
 namespace AcademyProductNotes\Migration;
 
 use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Exception;
 use Shopware\Core\Framework\Migration\MigrationStep;
 
 class Migration1747313200CreateProductNoteTable extends MigrationStep
@@ -12,6 +13,11 @@ class Migration1747313200CreateProductNoteTable extends MigrationStep
         return 1747313200;
     }
 
+    /**
+     * Update the database schema every time the plugin is updated
+     *
+     * @throws Exception
+     */
     public function update(Connection $connection): void
     {
         $sql = <<<SQL
@@ -30,10 +36,4 @@ CREATE TABLE IF NOT EXISTS `academy_product_note` (
 SQL;
         $connection->executeStatement($sql);
     }
-
-    public function updateDestructive(Connection $connection): void
-    {
-        // Drop table if needed during uninstall
-        $connection->executeStatement('DROP TABLE IF EXISTS `academy_product_note`');
-    }
-} 
+}
