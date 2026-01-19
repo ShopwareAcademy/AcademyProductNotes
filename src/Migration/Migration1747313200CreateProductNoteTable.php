@@ -15,7 +15,8 @@ class Migration1747313200CreateProductNoteTable extends MigrationStep
 
     /**
      * Applies the database schema changes for this migration
-     * This method is executed once when the migration is new.*
+     * This method is executed once when the migration is new.
+     *
      * @throws Exception
      */
     public function update(Connection $connection): void
