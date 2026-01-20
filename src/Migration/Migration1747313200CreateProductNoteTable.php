@@ -31,8 +31,9 @@ CREATE TABLE IF NOT EXISTS `academy_product_note` (
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NULL ON UPDATE CURRENT_TIMESTAMP(3),
     PRIMARY KEY (`id`),
-    CONSTRAINT `fk.academy_product_note.product_id` FOREIGN KEY (`product_id`)
-        REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT `fk.academy_product_note.product_id`
+        FOREIGN KEY (`product_id`) REFERENCES `product` (`id`) 
+        ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 SQL;
         $connection->executeStatement($sql);

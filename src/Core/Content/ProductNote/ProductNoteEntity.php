@@ -14,8 +14,7 @@ class ProductNoteEntity extends Entity
     protected string $userName;
     protected string $note;
     protected bool $solved;
-    protected ?\DateTimeInterface $createdAt = null;
-    protected ?\DateTimeInterface $updatedAt = null;
+
     protected ?ProductEntity $product = null;
 
     public function getProductId(): string
@@ -56,26 +55,6 @@ class ProductNoteEntity extends Entity
     public function setSolved(bool $solved): void
     {
         $this->solved = $solved;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(?\DateTimeInterface $createdAt): void
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): void
-    {
-        $this->updatedAt = $updatedAt;
     }
 
     public function getProduct(): ?ProductEntity
