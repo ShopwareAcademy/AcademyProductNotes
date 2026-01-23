@@ -11,7 +11,7 @@ class ProductNoteEntity extends Entity
     use EntityIdTrait;
 
     protected string $productId;
-    protected string $userName;
+    protected string $productVersionId;
     protected string $note;
     protected bool $solved;
 
@@ -27,14 +27,14 @@ class ProductNoteEntity extends Entity
         $this->productId = $productId;
     }
 
-    public function getUserName(): string
+    public function getProductVersionId(): string
     {
-        return $this->userName;
+        return $this->productVersionId;
     }
 
-    public function setUserName(string $userName): void
+    public function setProductVersionId(string $productVersionId): void
     {
-        $this->userName = $userName;
+        $this->productVersionId = $productVersionId;
     }
 
     public function getNote(): string
