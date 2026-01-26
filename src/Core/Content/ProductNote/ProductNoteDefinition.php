@@ -12,7 +12,7 @@ use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\Required;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\IdField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\LongTextField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\ManyToOneAssociationField;
-use Shopware\Core\Framework\DataAbstractionLayer\Field\StringField;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\ReferenceVersionField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\UpdatedAtField;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
 
@@ -40,13 +40,18 @@ class ProductNoteDefinition extends EntityDefinition
         return new FieldCollection([
             (new IdField('id', 'id'))->addFlags(new PrimaryKey(), new Required()),
             (new FkField('product_id', 'productId', ProductDefinition::class))->addFlags(new Required()),
-            (new StringField('user_name', 'userName'))->addFlags(new Required()),
+            (new ReferenceVersionField(ProductDefinition::class, 'product_version_id'))->addFlags(new Required()),
             (new LongTextField('note', 'note'))->addFlags(new Required()),
             (new BoolField('solved', 'solved'))->addFlags(new Required()),
             new CreatedAtField(),
             new UpdatedAtField(),
-            
-            new ManyToOneAssociationField('product', 'product_id', ProductDefinition::class, 'id', false),
+            new ManyToOneAssociationField(
+                'product',
+                'product_id',
+                ProductDefinition::class,
+                'id',
+                false
+            ),
         ]);
     }
 } 

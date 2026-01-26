@@ -13,5 +13,11 @@
         <service id="AcademyProductNotes\Core\Content\Product\ProductExtension">
             <tag name="shopware.entity.extension" />
         </service>
+
+        <service id="AcademyProductNotes\Service\ProductNoteService\ProductNoteService">
+            <argument type="service" id="academy_product_note.repository"/>
+            <argument type="service" id="product.repository"/>
+            <argument type="service" id="monolog.logger"/>
+        </service>
     </services>
 </container> 

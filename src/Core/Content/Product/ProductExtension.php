@@ -10,10 +10,12 @@ use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
 
 class ProductExtension extends EntityExtension
 {
+    public const string EXTENSION_NAME = 'academyProductNotes';
+
     public function extendFields(FieldCollection $collection): void
     {
         $collection->add(
-            new OneToManyAssociationField('academyProductNotes', ProductNoteDefinition::class, 'product_id')
+            new OneToManyAssociationField(self::EXTENSION_NAME, ProductNoteDefinition::class, 'product_id')
         );
     }
 
@@ -24,6 +26,6 @@ class ProductExtension extends EntityExtension
 
     public function getEntityName(): string
     {
-        return 'product';
+        return ProductDefinition::ENTITY_NAME;
     }
-} 
+}
