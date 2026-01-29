@@ -1,6 +1,6 @@
 import template from './sw-product-detail-notes.html.twig';
 
-const { Component, Mixin } = Shopware;
+const { Context, Component, Mixin, Filter } = Shopware;
 const { Criteria } = Shopware.Data;
 
 Component.register('sw-product-detail-notes', {
@@ -11,13 +11,6 @@ Component.register('sw-product-detail-notes', {
     mixins: [
         Mixin.getByName('notification')
     ],
-
-    props: {
-        product: {
-            type: Object,
-            required: true
-        }
-    },
 
     data() {
         return {
@@ -31,6 +24,14 @@ Component.register('sw-product-detail-notes', {
     },
 
     computed: {
+        productId() {
+            return this.$route.params.id;
+        },
+
+        dateFilter() {
+            return Filter.getByName('date');
+        },
+
         noteRepository() {
             return this.repositoryFactory.create('academy_product_note');
         },
@@ -38,23 +39,18 @@ Component.register('sw-product-detail-notes', {
         noteColumns() {
             return [
                 {
-                    property: 'userName',
-                    label: this.$tc('academy-product-notes.detail.columnUserName'),
-                    rawData: true
-                },
-                {
                     property: 'note',
-                    label: this.$tc('academy-product-notes.detail.columnNote'),
+                    label: this.$t('academy-product-notes.detail.columnNote'),
                     rawData: true
                 },
                 {
                     property: 'solved',
-                    label: this.$tc('academy-product-notes.detail.columnSolved'),
+                    label: this.$t('academy-product-notes.detail.columnSolved'),
                     rawData: true
                 },
                 {
                     property: 'createdAt',
-                    label: this.$tc('academy-product-notes.detail.columnCreatedAt'),
+                    label: this.$t('academy-product-notes.detail.columnCreatedAt'),
                     rawData: true
                 }
             ];
@@ -69,10 +65,10 @@ Component.register('sw-product-detail-notes', {
         loadNotes() {
             this.isLoading = true;
             const criteria = new Criteria();
-            criteria.addFilter(Criteria.equals('productId', this.product.id));
+            criteria.addFilter(Criteria.equals('productId', this.productId));
             criteria.addSorting(Criteria.sort('createdAt', 'DESC'));
 
-            this.noteRepository.search(criteria, Shopware.Context.api)
+            this.noteRepository.search(criteria, Context.api)
                 .then((result) => {
                     this.notes = result;
                 })
@@ -82,8 +78,8 @@ Component.register('sw-product-detail-notes', {
         },
 
         onAddNote() {
-            this.currentNote = this.noteRepository.create(Shopware.Context.api);
-            this.currentNote.productId = this.product.id;
+            this.currentNote = this.noteRepository.create(Context.api);
+            this.currentNote.productId = this.productId;
             this.currentNote.solved = false;
             this.showModal = true;
         },
@@ -103,16 +99,16 @@ Component.register('sw-product-detail-notes', {
                 return;
             }
 
-            this.noteRepository.delete(this.noteToDelete.id, Shopware.Context.api)
+            this.noteRepository.delete(this.noteToDelete.id, Context.api)
                 .then(() => {
                     this.createNotificationSuccess({
-                        message: this.$tc('academy-product-notes.detail.messageDeleteSuccess')
+                        message: this.$t('academy-product-notes.detail.messageDeleteSuccess')
                     });
                     this.loadNotes();
                 })
                 .catch(() => {
                     this.createNotificationError({
-                        message: this.$tc('academy-product-notes.detail.messageError')
+                        message: this.$t('academy-product-notes.detail.messageError')
                     });
                 })
                 .finally(() => {
@@ -127,17 +123,17 @@ Component.register('sw-product-detail-notes', {
         },
 
         onSaveNote() {
-            this.noteRepository.save(this.currentNote, Shopware.Context.api)
+            this.noteRepository.save(this.currentNote, Context.api)
                 .then(() => {
                     this.createNotificationSuccess({
-                        message: this.$tc('academy-product-notes.detail.messageSaveSuccess')
+                        message: this.$t('academy-product-notes.detail.messageSaveSuccess')
                     });
                     this.showModal = false;
                     this.loadNotes();
                 })
                 .catch(() => {
                     this.createNotificationError({
-                        message: this.$tc('academy-product-notes.detail.messageError')
+                        message: this.$t('academy-product-notes.detail.messageError')
                     });
                 });
         },

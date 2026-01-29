@@ -1,10 +1,10 @@
-<sw-card :title="$tc('academy-product-notes.detail.cardTitle')" :isLoading="isLoading">
+<sw-card :title="$t('academy-product-notes.detail.cardTitle')" :isLoading="isLoading">
     <template #toolbar>
         <sw-button 
             variant="primary" 
             size="small"
             @click="onAddNote">
-            {{ $tc('academy-product-notes.detail.buttonAddNote') }}
+            {{ $t('academy-product-notes.detail.buttonAddNote') }}
         </sw-button>
     </template>
 
@@ -23,37 +23,31 @@
             </template>
 
             <template #column-solved="{ item }">
-                <sw-icon 
-                    v-if="item.solved" 
-                    name="small-default-checkmark-line-medium" 
-                    color="#37d046">
-                </sw-icon>
-                <sw-icon 
-                    v-else 
-                    name="small-default-x-line-medium" 
-                    color="#de294c">
-                </sw-icon>
+                <sw-data-grid-column-boolean
+                    :value="item.solved"
+                    :is-inline-edit="false"
+                />
             </template>
 
             <template #column-createdAt="{ item }">
-                {{ item.createdAt | date }}
+                {{ dateFilter(item.createdAt, { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }) }}
             </template>
 
             <template #actions="{ item }">
                 <sw-context-menu-item @click="onEditNote(item)">
-                    {{ $tc('academy-product-notes.detail.buttonEdit') }}
+                    {{ $t('academy-product-notes.detail.buttonEdit') }}
                 </sw-context-menu-item>
                 <sw-context-menu-item 
                     variant="danger"
                     @click="onDeleteNote(item)">
-                    {{ $tc('academy-product-notes.detail.buttonDelete') }}
+                    {{ $t('academy-product-notes.detail.buttonDelete') }}
                 </sw-context-menu-item>
             </template>
         </sw-data-grid>
 
         <sw-empty-state
             v-else
-            :title="$tc('academy-product-notes.detail.messageNoNotes')">
+            :title="$t('academy-product-notes.detail.messageNoNotes')">
         </sw-empty-state>
     </template>
 
@@ -68,23 +62,26 @@
     <!-- Delete Modal -->
     <sw-modal
         v-if="showDeleteModal"
-        :title="$tc('academy-product-notes.detail.buttonDelete')"
+        :title="$t('academy-product-notes.detail.buttonDelete')"
         variant="small"
         @modal-close="onCancelDelete">
-        <p>{{ $tc('academy-product-notes.detail.messageDeleteConfirm') }}</p>
+        <p>{{ $t('academy-product-notes.detail.messageDeleteConfirm') }}</p>
         
         <template #modal-footer>
-            <sw-button 
+            <mt-button
                 size="small"
-                @click="onCancelDelete">
-                {{ $tc('academy-product-notes.detail.buttonCancel') }}
-            </sw-button>
-            <sw-button 
-                variant="danger" 
+                variant="secondary"
+                @click="onCancelDelete"
+            >
+                {{ $t('academy-product-notes.detail.buttonCancel') }}
+            </mt-button>
+            <mt-button
+                variant="critical"
                 size="small"
-                @click="onConfirmDelete">
-                {{ $tc('academy-product-notes.detail.buttonDelete') }}
-            </sw-button>
+                @click="onConfirmDelete"
+            >
+                {{ $t('academy-product-notes.detail.buttonDelete') }}
+            </mt-button>
         </template>
     </sw-modal>
 </sw-card> 

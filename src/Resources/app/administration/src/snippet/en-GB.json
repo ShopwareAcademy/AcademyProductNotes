@@ -7,7 +7,6 @@
     "detail": {
       "tabNotes": "Notes",
       "cardTitle": "Product Notes",
-      "columnUserName": "User",
       "columnNote": "Note",
       "columnSolved": "Solved",
       "columnCreatedAt": "Created",
@@ -17,10 +16,8 @@
       "buttonDelete": "Delete",
       "buttonSave": "Save",
       "buttonCancel": "Cancel",
-      "labelUserName": "User Name",
       "labelNote": "Note",
       "labelSolved": "Solved",
-      "placeholderUserName": "Enter user name...",
       "placeholderNote": "Enter note...",
       "messageDeleteConfirm": "Are you sure you want to delete this note?",
       "messageNoNotes": "No notes available",

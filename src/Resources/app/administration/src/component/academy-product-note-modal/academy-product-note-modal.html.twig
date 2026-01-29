@@ -2,40 +2,35 @@
     :title="modalTitle"
     @modal-close="onClose">
 
-    <template #modal-body>
-        <sw-container columns="1fr" gap="20px">
-            <sw-text-field
-                v-model="note.userName"
-                :label="$tc('academy-product-notes.detail.labelUserName')"
-                :placeholder="$tc('academy-product-notes.detail.placeholderUserName')"
-                required>
-            </sw-text-field>
+    <template #body>
+        <div class="academy-product-note-modal__content">
+            <sw-container columns="1fr" gap="20px">
+                <sw-textarea-field
+                    v-model="note.note"
+                    :label="$t('academy-product-notes.detail.labelNote')"
+                    :placeholder="$t('academy-product-notes.detail.placeholderNote')"
+                    required>
+                </sw-textarea-field>
 
-            <sw-textarea-field
-                v-model="note.note"
-                :label="$tc('academy-product-notes.detail.labelNote')"
-                :placeholder="$tc('academy-product-notes.detail.placeholderNote')"
-                required>
-            </sw-textarea-field>
-
-            <sw-checkbox-field
-                v-model="note.solved"
-                :label="$tc('academy-product-notes.detail.labelSolved')">
-            </sw-checkbox-field>
-        </sw-container>
+                <sw-checkbox-field
+                    v-model="note.solved"
+                    :label="$t('academy-product-notes.detail.labelSolved')">
+                </sw-checkbox-field>
+            </sw-container>
+        </div>
     </template>
 
     <template #modal-footer>
         <sw-button 
             size="small"
             @click="onClose">
-            {{ $tc('academy-product-notes.detail.buttonCancel') }}
+            {{ $t('academy-product-notes.detail.buttonCancel') }}
         </sw-button>
         <sw-button 
             variant="primary" 
             size="small"
             @click="onSave">
-            {{ $tc('academy-product-notes.detail.buttonSave') }}
+            {{ $t('academy-product-notes.detail.buttonSave') }}
         </sw-button>
     </template>
 </sw-modal> 
