@@ -2,9 +2,16 @@
   "name": "academy/product-notes",
   "description": "Plugin to add notes to products for internal use in the admin panel.",
   "type": "shopware-platform-plugin",
+  "version": "1.0.0",
   "license": "MIT",
+  "authors": [
+    {
+      "name": "Shopware Academy",
+      "email": "academy@shopware.com"
+    }
+  ],
   "require": {
-    "shopware/core": "*"
+    "shopware/core": "~6.7.0"
   },
   "autoload": {
     "psr-4": {
@@ -16,6 +23,10 @@
     "label": {
       "en-GB": "Academy Product Notes",
       "de-DE": "Academy Produkt Notizen"
+    },
+    "description": {
+      "en-GB": "Adds an internal notes system for products in the administration (DAL custom entity example).",
+      "de-DE": "Fügt ein internes Notizsystem für Produkte in der Administration hinzu (DAL-Custom-Entity-Beispiel)."
     }
   }
 } 

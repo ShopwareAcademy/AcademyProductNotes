@@ -54,12 +54,12 @@ CREATE TABLE `academy_product_note` (
 
 3. **Admin Interface**
    - Vue.js components for notes management
-   - Integration with product detail page
+   - Integration with the product detail page
    - Translations for German and English
 
 4. **Migration**
    - Database table creation with proper constraints
-   - Destructive migration for clean uninstall
+   - Destructive migration for clean uninstallation
 
 ### File Structure
 
@@ -143,6 +143,28 @@ This plugin serves as a reference implementation for:
 - Implementing proper migrations
 - Following Shopware 6 development best practices
 
+## Educational Value
+
+This plugin demonstrates:
+
+1. **Cart Validation Patterns**: How to implement custom cart validators
+2. **Error Handling**: Proper error classes and translation integration
+3. **Service Registration**: Dependency injection configuration
+4. **Testing Strategies**: Both integration and unit testing approaches
+5. **Shopware 6.7 Compatibility**: Latest interfaces and best practices
+
+> Note: This plugin is focused on DAL/custom entities and Administration integration (not cart). The list above is included for consistency across Academy examples.
+
+## Requirements
+
+- Shopware 6.7+
+- PHP 8.3
+- Composer
+
 ## License
 
-MIT License 
+MIT License – Educational use only (intended as an educational example; the MIT license in `composer.json` applies).
+
+## Contributing
+
+This plugin is part of the Shopware Academy curriculum. For educational purposes only.
