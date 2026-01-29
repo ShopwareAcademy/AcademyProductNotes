@@ -9,7 +9,7 @@ A Shopware 6 plugin that demonstrates how to use the Data Abstraction Layer (DAL
 - Notes tab in product detail page
 - Support for German and English translations
 - Full CRUD operations (Create, Read, Update, Delete)
-- User tracking and solved status for notes
+- Solved status for notes
 
 ## Entity Structure
 
@@ -17,7 +17,7 @@ The plugin creates a custom entity with the following fields:
 
 - `id` - Primary key (UUID)
 - `product_id` - Foreign key to product table
-- `user_name` - Name of the user who created the note
+- `product_version_id` - Foreign key to product version
 - `note` - The note content (long text)
 - `solved` - Boolean flag indicating if the note is resolved
 - `created_at` - Creation timestamp
@@ -29,14 +29,17 @@ The plugin creates a custom entity with the following fields:
 CREATE TABLE `academy_product_note` (
     `id` BINARY(16) NOT NULL,
     `product_id` BINARY(16) NOT NULL,
-    `user_name` VARCHAR(255) NOT NULL,
+    `product_version_id` BINARY(16) NOT NULL,
     `note` LONGTEXT NOT NULL,
-    `solved` TINYINT(1) NOT NULL DEFAULT 0,
+    `solved` TINYINT(1) DEFAULT 0 NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NULL ON UPDATE CURRENT_TIMESTAMP(3),
     PRIMARY KEY (`id`),
-    CONSTRAINT `fk.academy_product_note.product_id` FOREIGN KEY (`product_id`)
-        REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+    CONSTRAINT `fk.academy_product_note.product`
+      FOREIGN KEY (`product_id`, `product_version_id`)
+      REFERENCES `product` (`id`, `version_id`)
+      ON DELETE CASCADE
+      ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 ```
 

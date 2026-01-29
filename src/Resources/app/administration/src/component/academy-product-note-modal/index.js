@@ -1,4 +1,5 @@
 import template from './academy-product-note-modal.html.twig';
+import './academy-product-note-modal.scss';
 
 const { Component } = Shopware;
 
@@ -15,8 +16,8 @@ Component.register('academy-product-note-modal', {
     computed: {
         modalTitle() {
             return this.note.isNew() 
-                ? this.$tc('academy-product-notes.detail.buttonAddNote')
-                : this.$tc('academy-product-notes.detail.buttonEdit');
+                ? this.$t('academy-product-notes.detail.buttonAddNote')
+                : this.$t('academy-product-notes.detail.buttonEdit');
         }
     },
 

@@ -1,8 +1,11 @@
 {
   "main.js": {
-    "file": "assets/academy-product-notes-CJJrTNav.js",
+    "file": "assets/academy-product-notes-VHmyc3sv.js",
     "name": "academy-product-notes",
     "src": "main.js",
-    "isEntry": true
+    "isEntry": true,
+    "css": [
+      "assets/academy-product-notes-CakOp62Q.css"
+    ]
   }
 }

@@ -1,24 +1,15 @@
 {% block sw_product_detail_content_tabs_additional %}
-    <sw-tabs-item
-        name="notes"
-        :route="{ name: 'sw.product.detail.notes', params: { id: $route.params.id } }"
-        :title="$tc('academy-product-notes.detail.tabNotes')">
-        {{ $tc('academy-product-notes.detail.tabNotes') }}
-    </sw-tabs-item>
-{% endblock %}
+    {% parent %}
 
-{% block sw_product_detail_content_view %}
-    <router-view
-        v-slot="{ Component }"
+    <sw-tabs-item
+            :route="{
+                name: 'sw.product.detail.productNotes',
+                params: {
+                    id: $route.params.id
+                }
+            }"
     >
-        <component
-            :is="Component"
-            @cover-change="onCoverChange"
-        />
-    </router-view>
-    
-    <sw-product-detail-notes 
-        v-if="$route.name === 'sw.product.detail.notes'"
-        :product="product">
-    </sw-product-detail-notes>
-{% endblock %} 
+        {{ $t('academy-product-notes.detail.tabNotes') }}
+    </sw-tabs-item>
+
+{% endblock %}

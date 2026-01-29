@@ -7,7 +7,6 @@
     "detail": {
       "tabNotes": "Notizen",
       "cardTitle": "Produkt Notizen",
-      "columnUserName": "Benutzer",
       "columnNote": "Notiz",
       "columnSolved": "Gelöst",
       "columnCreatedAt": "Erstellt",
@@ -17,10 +16,8 @@
       "buttonDelete": "Löschen",
       "buttonSave": "Speichern",
       "buttonCancel": "Abbrechen",
-      "labelUserName": "Benutzername",
       "labelNote": "Notiz",
       "labelSolved": "Gelöst",
-      "placeholderUserName": "Benutzername eingeben...",
       "placeholderNote": "Notiz eingeben...",
       "messageDeleteConfirm": "Sind Sie sicher, dass Sie diese Notiz löschen möchten?",
       "messageNoNotes": "Keine Notizen verfügbar",

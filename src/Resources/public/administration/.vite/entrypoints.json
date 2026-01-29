@@ -2,10 +2,12 @@
   "base": "/bundles/academyproductnotes/administration/",
   "entryPoints": {
     "academy-product-notes": {
-      "css": [],
+      "css": [
+        "/bundles/academyproductnotes/administration/assets/academy-product-notes-CakOp62Q.css"
+      ],
       "dynamic": [],
       "js": [
-        "/bundles/academyproductnotes/administration/assets/academy-product-notes-CJJrTNav.js"
+        "/bundles/academyproductnotes/administration/assets/academy-product-notes-VHmyc3sv.js"
       ],
       "legacy": false,
       "preload": []
