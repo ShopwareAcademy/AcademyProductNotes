@@ -43,8 +43,6 @@ class ProductNoteDefinition extends EntityDefinition
             (new ReferenceVersionField(ProductDefinition::class, 'product_version_id'))->addFlags(new Required()),
             (new LongTextField('note', 'note'))->addFlags(new Required()),
             (new BoolField('solved', 'solved'))->addFlags(new Required()),
-            new CreatedAtField(),
-            new UpdatedAtField(),
             new ManyToOneAssociationField(
                 'product',
                 'product_id',
