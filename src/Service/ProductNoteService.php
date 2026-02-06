@@ -4,6 +4,7 @@ namespace AcademyProductNotes\Service\ProductNoteService;
 
 use AcademyProductNotes\Core\Content\Product\ProductExtension;
 use AcademyProductNotes\Core\Content\ProductNote\ProductNoteDefinition;
+use AcademyProductNotes\Core\Content\ProductNote\ProductNoteCollection;
 use AcademyProductNotes\Core\Content\ProductNote\ProductNoteEntity;
 use DateTimeImmutable;
 use InvalidArgumentException;
@@ -13,6 +14,8 @@ use Shopware\Core\Defaults;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\EntitySearchResult;
+use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\ContainsFilter;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
 use Throwable;
 
@@ -24,12 +27,13 @@ use Throwable;
  */
 class ProductNoteService
 {
+    private const string DATE_FORMAT = 'Y-m-d H:i:s';
+
     public function __construct(
         private readonly EntityRepository $productNoteRepository,
         private readonly EntityRepository $productRepository,
         private readonly LoggerInterface  $logger,
-    )
-    {
+    ) {
     }
 
     public function getProductWithNotes(string $productId, Context $context): ?ProductEntity
@@ -43,6 +47,61 @@ class ProductNoteService
         $product = $this->productRepository->search($criteria, $context)->first();
 
         return $product;
+    }
+
+    public function findProductsWithNotesContaining(string $searchTerm, Context $context): EntitySearchResult
+    {
+        $criteria = new Criteria();
+
+        // Load the notes association
+        $criteria->addAssociation(ProductExtension::EXTENSION_NAME);
+
+        // Filter products that have notes containing the search term
+        $criteria->addFilter(
+            new ContainsFilter(
+                ProductExtension::EXTENSION_NAME . '.note',
+                $searchTerm
+            )
+        );
+
+        return $this->productRepository->search($criteria, $context);
+    }
+
+    public function getProductNotesDashboard(string $productId, Context $context): array
+    {
+        $criteria = new Criteria([$productId]);
+        $criteria->addAssociation(ProductExtension::EXTENSION_NAME);
+
+        /** @var ProductEntity|null $product */
+        $product = $this->productRepository->search($criteria, $context)->first();
+        if (null === $product) {
+            throw new InvalidArgumentException(sprintf('Product "%s" not found', $productId));
+        }
+
+        /** @var ProductNoteCollection|null $notes */
+        $notes = $product->getExtensionOfType(ProductExtension::EXTENSION_NAME, ProductNoteCollection::class);
+
+        $notesData = [];
+        if (null !== $notes) {
+            /** @var ProductNoteEntity $note */
+            foreach ($notes as $note) {
+                $notesData[] = [
+                    'id' => $note->getId(),
+                    'note' => $note->getNote(),
+                    'createdAt' => $note->getCreatedAt()?->format(self::DATE_FORMAT),
+                    'solved' => $note->isSolved(),
+                ];
+            }
+        }
+
+        return [
+            'product' => [
+                'id' => $product->getId(),
+                'name' => $product->getName(),
+                'noteCount' => $notes?->count() ?? 0,
+            ],
+            'notes' => $notesData,
+        ];
     }
 
     public function createProductNote(string $productId, string $note, Context $context): ?string
