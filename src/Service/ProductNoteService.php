@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace AcademyProductNotes\Service\ProductNoteService;
+namespace AcademyProductNotes\Service;
 
 use AcademyProductNotes\Core\Content\Product\ProductExtension;
 use AcademyProductNotes\Core\Content\ProductNote\ProductNoteDefinition;
